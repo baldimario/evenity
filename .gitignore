@@ -1,4 +1,6 @@
 bin
 lib
 lib64
+dist
 pyvenv.cfg
+*.egg-info
