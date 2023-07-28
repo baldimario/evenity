@@ -4,3 +4,4 @@ lib64
 dist
 pyvenv.cfg
 *.egg-info
+.env
