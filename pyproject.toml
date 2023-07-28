@@ -3,8 +3,8 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools>=42"]
 
 [project]
-name = "hooked"
-version = "0.0.2"
+name = "evenity"
+version = "0.0.1"
 authors = [
   { name="Mario Baldi", email="mariobaldi.py@gmail.com" },
 ]
@@ -17,5 +17,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/baldimario/hooked"
-"Bug Tracker" = "https://github.com/baldimario/hooked/issues"
+"Homepage" = "https://github.com/baldimario/evenity"
+"Bug Tracker" = "https://github.com/baldimario/evenity/issues"

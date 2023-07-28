@@ -17,3 +17,6 @@ build: clean ## Build the python package
 
 staging: ## Deploy on test.pypi.org with twine
 	@twine upload -u "$(TWINE_USERNAME)" -p "$(TWINE_PASSWORD)" --repository-url https://test.pypi.org/legacy/ dist/*
+
+production: ## Deploy on pypi.org with twine
+	@twine upload -u "$(TWINE_USERNAME)" -p "$(TWINE_PASSWORD)" --repository-url https://upload.pypi.org/legacy/ dist/*
