@@ -6,7 +6,7 @@ pip install evenity
 ```
 
 ## Usage
-See examples folder
+See examples folder at [https://github.com/baldimario/evenity](https://github.com/baldimario/evenity)
 
 ### simple.py 
 This file contains an implementation of observers and observable

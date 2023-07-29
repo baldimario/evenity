@@ -5,6 +5,11 @@ class Observer:
 
     def __init__(self, observable):
         self._listeners = {}
+        self.observable = observable
+        self.register(observable)
+
+    def register(self, observable):
+        """Register to an observable"""
         observable.register_observer(self)
 
     def notify(self, listener, event):
