@@ -5,3 +5,5 @@ dist
 pyvenv.cfg
 *.egg-info
 .env
+__pycache__
+include
