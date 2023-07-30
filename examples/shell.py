@@ -1,6 +1,6 @@
 """Shell Example"""
-from hooked.plugins.shell import ShellObservableConsumer
-from hooked.observer import Observer
+from evenity.plugins.shell import ShellObservableConsumer
+from evenity.observer import Observer
 
 class ShellListener(Observer):
     """ShellListener class"""

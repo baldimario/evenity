@@ -2,8 +2,8 @@
 import os
 import json
 from dotenv import load_dotenv
-from hooked.observer import Observer # pylint: disable=import-error
-from hooked.plugins.kafka import KafkaObservableConsumer # pylint: disable=import-error
+from evenity.observer import Observer # pylint: disable=import-error
+from evenity.plugins.kafka import KafkaObservableConsumer # pylint: disable=import-error
 
 class ImporterListener(Observer):
     """ImporterListener class"""

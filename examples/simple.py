@@ -1,6 +1,6 @@
 """Simple Example"""
-from hooked.observable import Observable
-from hooked.observer import Observer
+from evenity.observable import Observable
+from evenity.observer import Observer
 
 class EventDispatcher(Observable):
     """EventDispatcher class"""

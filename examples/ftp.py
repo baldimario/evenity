@@ -1,8 +1,8 @@
 """FTP Example"""
 import os
 import dotenv
-from hooked.observer import Observer # pylint: disable=import
-from hooked.event.plugins.ftp import FTPObservableConsumer
+from evenity.observer import Observer # pylint: disable=import
+from evenity.event.plugins.ftp import FTPObservableConsumer
 
 ABSPATH = os.path.abspath(os.path.dirname(__file__))
 
