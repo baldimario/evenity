@@ -17,10 +17,14 @@ This script contains an implementations of some listeners (observers) for the ka
 
 This subscribe some listeners for the KafkaObservableConsumer listening for events from many topics
 
+dependency: kafka-python
+
 ## ftp.py 
 ftp.py contains an example listener for the ftp observable
 
 This can be useful wen you want to handle file uploaded in an event way
+
+dependency: pyftpdlib
 
 ## shell.py
 This file contains an example listener for the shell observable
@@ -31,3 +35,12 @@ The use case is to read an output steam from a program (or fifo file) and receiv
 This script contains an example listener for telegram bot events (updates, texts and commands)
 
 The observers will be notified for each telegram bot event
+
+dependency: telepot
+
+## ws.py
+This scripts contains an example for websocket connection (open, close, error, message)
+
+Handle websocket events
+
+dependency: websocket-client
