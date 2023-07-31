@@ -21,6 +21,9 @@ class Observer:
         """Listen to an event"""
         self._listeners[event] = callback
 
+    def __del__(self):
+        self.observable.unregister_observer(self)
+
 class SimpleObserver(Observer):
     """SimpleObserver class"""
 
