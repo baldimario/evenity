@@ -25,7 +25,6 @@ class SimpleObserver(Observer):
     """SimpleObserver class"""
 
     def __init__(self, observable, callback_lookup):
-        self.observable = observable
-        self.observable.register_observer(self)
+        super().__init__(observable)
         for event, callback in callback_lookup.items():
             self.listen(event, callback)

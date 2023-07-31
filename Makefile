@@ -20,3 +20,6 @@ staging: ## Deploy on test.pypi.org with twine
 
 production: ## Deploy on pypi.org with twine
 	@twine upload -u "$(TWINE_USERNAME)" -p "$(TWINE_PASSWORD)" --repository-url https://upload.pypi.org/legacy/ dist/*
+
+test: ## Run tests
+	python -m unittest discover tests
