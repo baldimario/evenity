@@ -1,6 +1,4 @@
 """Websocket Observable Class"""
-import sys
-sys.path.append(".")
 from evenity.plugins.websocket import WebsocketObservable
 from evenity.observer import Observer
 

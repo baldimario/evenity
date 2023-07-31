@@ -1,6 +1,6 @@
 """Simple Example"""
 from evenity.observable import Observable
-from evenity.observer import Observer
+from evenity.observer import Observer, SimpleObserver
 
 class EventDispatcher(Observable):
     """EventDispatcher class"""
@@ -12,7 +12,7 @@ class EventDispatcher(Observable):
         """Consume the observable"""
         self.notify_observers(topic, event)
 
-class EventListener1(Observer):
+class EventListener(Observer):
     """EventListener1 class"""
 
     def __init__(self, observable):
@@ -23,29 +23,20 @@ class EventListener1(Observer):
         """On test event"""
         print(f"1 {event}")
 
-class EventListener2(Observer):
-    """EventListener2 class"""
-
-    def __init__(self, observable):
-        super().__init__(observable)
-        self.listen("test", self.on_test)
-        self.listen("foo", self.on_foo)
-
-    def on_test(self, event):
-        """On test event"""
-        print(f"2: {event}")
-
-    def on_foo(self, event):
-        """On test event"""
-        print(f"2 {event}")
+def on_foo(event):
+    """On test event"""
+    print(f"2 {event}")
 
 def main():
     """Main function"""
     # Create the dispatcher that consume messages and notify observers
     dispatcher = EventDispatcher()
 
-    EventListener1(dispatcher)
-    EventListener2(dispatcher)
+    EventListener(dispatcher)
+    SimpleObserver(dispatcher, {
+        'test': lambda event: print(f"2 {event}"),
+        'foo': on_foo
+    })
 
     # Simulate dispatching of some events
     events = [

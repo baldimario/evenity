@@ -12,8 +12,9 @@ class FTPObservableConsumer(Observable):
             """On file received"""
             self.observable.on_file_received(file)
 
-    def __init__(self, user='admin', password='12345', port=21, path='./storage'): # pylint: disable=useless-super-delegation
+    def __init__(self, host='0.0.0.0', user='admin', password='12345', port=21, path='./storage', on_file_received_event='ftp'): # pylint: disable=useless-super-delegation
         super().__init__()
+        self.on_file_received_event = on_file_received_event
         authorizer = DummyAuthorizer()
         authorizer.add_user(user, password, path, perm="elradfmwMT")
         handler = self.CustomHandler
@@ -21,7 +22,7 @@ class FTPObservableConsumer(Observable):
         handler.authorizer = authorizer
         handler.passive_ports = range(60000, 65535)
         handler.permit_foreign_addresses = True
-        self.server = FTPServer(("0.0.0.0", port), handler)
+        self.server = FTPServer((host, port), handler)
 
     def consume(self):
         """Consume the observable"""
@@ -29,4 +30,4 @@ class FTPObservableConsumer(Observable):
 
     def on_file_received(self, file):
         """On file received"""
-        self.notify_observers('ftp', file)
+        self.notify_observers(self.on_file_received_event, file)

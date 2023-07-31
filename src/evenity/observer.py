@@ -20,3 +20,12 @@ class Observer:
     def listen(self, event, callback):
         """Listen to an event"""
         self._listeners[event] = callback
+
+class SimpleObserver(Observer):
+    """SimpleObserver class"""
+
+    def __init__(self, observable, callback_lookup):
+        self.observable = observable
+        self.observable.register_observer(self)
+        for event, callback in callback_lookup.items():
+            self.listen(event, callback)

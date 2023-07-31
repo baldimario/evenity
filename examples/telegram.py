@@ -2,7 +2,7 @@
 import os
 import dotenv
 from evenity.observer import Observer # pylint: disable=import
-from evenity.event.plugins.telegram import AsyncTelegramaObservableConsumer
+from evenity.plugins.telegram import AsyncTelegramaObservableConsumer
 
 dotenv.load_dotenv()
 
@@ -12,7 +12,6 @@ class BotListener(Observer):
     def __init__(self, observable):
         super().__init__(observable)
         self.listen("telegram", self.on_telegram)
-        self._broadcast('Bot started')
 
     def _get_bot(self):
         """Get bot instance"""
@@ -58,7 +57,8 @@ class BotListener(Observer):
 def main():
     """Main function"""
     telegram_consumer = AsyncTelegramaObservableConsumer(
-        token=os.environ.get('TOKEN')
+        token=os.environ.get('TOKEN'),
+        on_message_received_event='telegram'
     )
 
     BotListener(telegram_consumer)

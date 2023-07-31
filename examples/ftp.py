@@ -24,7 +24,9 @@ def main():
         user=os.environ.get('FTP_USER'),
         password=os.environ.get('FTP_PASSWORD'),
         port=os.environ.get('FTP_PORT'),
-        path=os.path.join(ABSPATH, os.environ.get('FTP_PATH'))
+        path=os.path.join(ABSPATH, os.environ.get('FTP_PATH')),
+        host=os.environ.get('FTP_BIND_ADDRESS'),
+        on_file_received_event='ftp'
     )
 
     FTPListener(ftp_consumer)
