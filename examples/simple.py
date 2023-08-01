@@ -32,8 +32,8 @@ def main():
     # Create the dispatcher that consume messages and notify observers
     dispatcher = EventDispatcher()
 
-    EventListener(dispatcher)
-    SimpleObserver(dispatcher, {
+    listener1 = EventListener(dispatcher)
+    listener2 = SimpleObserver(dispatcher, {
         'test': lambda event: print(f"2 {event}"),
         'foo': on_foo
     })

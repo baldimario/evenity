@@ -61,7 +61,7 @@ def main():
         on_message_received_event='telegram'
     )
 
-    BotListener(telegram_consumer)
+    listener = BotListener(telegram_consumer)
 
     telegram_consumer.consume()
 

@@ -43,8 +43,8 @@ def main():
         ]
     )
 
-    ImporterListener(consumer)
-    ReleaserListener(consumer)
+    listener1 = ImporterListener(consumer)
+    listener2 = ReleaserListener(consumer)
 
     consumer.consume()
 

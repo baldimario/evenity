@@ -4,7 +4,7 @@ from evenity.observer import Observer
 
 class WebSocketListener(Observer):
     """Websocket listener."""
-    
+
     def __init__(self, observable):
         super().__init__(observable)
         self.listen("message", self.on_message)
@@ -17,13 +17,13 @@ class WebSocketListener(Observer):
         websocket = event['websocket']
         message = event['event']
         print(websocket, message)
-    
+
     def on_error(self, event):
         """Update websocket listener."""
         websocket = event['websocket']
         message = event['event']
         print(websocket, message)
-    
+
     def on_open(self, event):
         """Update websocket listener."""
         websocket = event['websocket']
@@ -46,7 +46,7 @@ def main():
         on_close_event='close', # optional, default 'close'
         on_message_event='message' # optional, default 'message'
     )
-    WebSocketListener(consumer)
+    listener = WebSocketListener(consumer)
     consumer.consume()
 
 if __name__ == '__main__':

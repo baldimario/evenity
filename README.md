@@ -5,6 +5,14 @@
 pip install evenity
 ```
 
+## Important Notes!
+Observables tracks observers with a weakref, if the reference to the observable is lost the observer automatically does not track the object anymore.
+So keep track of the observers in a variable to keep them receive observable events.
+It could've happened that when you delete an observer, the observable keeping track of the object made the garbage collector not delete it since it still kept its reference. In this case the observer continued to handle the events.
+Currently, however, the reference is maintained through a weakref which is why you need to be careful to keep the observer in a variable otherwise if you lose track of it, the observable will lose track of it and it will die.
+This is a safety measure to avoid memory leaks.
+(Thanks [krow89](https://github.com/krow89))
+
 ## Usage
 See examples folder at [https://github.com/baldimario/evenity](https://github.com/baldimario/evenity)
 
@@ -34,7 +42,7 @@ class EventListener(Observer):
     def on_test(self, event):
         """On test event"""
         print(f"1 {event}")
-    
+
     def on_foo(self, event):
         """On test event"""
         print(f"2 {event}")
@@ -42,7 +50,7 @@ class EventListener(Observer):
 def main():
     dispatcher = EventDispatcher()
 
-    EventListener(dispatcher)
+    listener = EventListener(dispatcher)
 
     # Simulate dispatching of some events
     events = [
@@ -60,7 +68,7 @@ if __name__ == '__main__':
 # 2 Foo Bar!
 ```
 
-### simple.py 
+### simple.py
 This file contains an implementation of observers and observable
 It shows how simple is to implement your own observable and register all the observers as you want
 
@@ -100,7 +108,7 @@ consumer = KafkaObservableConsumer(
     ]
 )
 
-Listener(consumer)
+listener = Listener(consumer)
 
 consumer.consume()
 ```
@@ -137,7 +145,7 @@ consumer = FTPObservableConsumer(
     on_file_received_event='ftp'
 )
 
-Listener(consumer)
+listener = Listener(consumer)
 
 consumer.consume()
 ```
@@ -165,7 +173,7 @@ class Listener(Observer):
         print(line)
 
 observable = ShellObservableConsumer('monitor-sensor --accel')
-Listener(observable)
+listener = Listener(observable)
 observable.consume()
 ```
 
@@ -185,7 +193,7 @@ class Listener(Observer):
     def __init__(self, observable):
         super().__init__(observable)
         self.listen("telegram", self.on_telegram)
-    
+
     def on_telegram(self, message):
         if 'chat' in message:
             user = message['username']
@@ -201,7 +209,7 @@ consumer = AsyncTelegramaObservableConsumer(
     on_message_received_event='telegram'
 )
 
-Listener(consumer)
+listener = Listener(consumer)
 
 consumer.consume()
 
@@ -222,7 +230,7 @@ from evenity.observer import Observer
 
 class Listener(Observer):
     """Websocket listener."""
-    
+
     def __init__(self, observable):
         super().__init__(observable)
         self.listen("message", self.on_message)
@@ -235,13 +243,13 @@ class Listener(Observer):
         websocket = event['websocket']
         message = event['event']
         print(websocket, message)
-    
+
     def on_error(self, event):
         """Update websocket listener."""
         websocket = event['websocket']
         message = event['event']
         print(websocket, message)
-    
+
     def on_open(self, event):
         """Update websocket listener."""
         websocket = event['websocket']
@@ -262,7 +270,7 @@ consumer = WebsocketObservable(
     on_message_event='message'
 )
 
-Listener(consumer)
+listener = Listener(consumer)
 
 consumer.consume()
 ```
@@ -288,7 +296,7 @@ def on_topic1(event):
     """On test event"""
     print(event.decode('utf-8'))
 
-SimpleObserver(consumer, {
+listener = SimpleObserver(consumer, {
     'topic1': on_topic1,
     'topic2': lambda event: print(event.decode('utf-8'))
 })

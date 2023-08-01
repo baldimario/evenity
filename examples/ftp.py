@@ -29,7 +29,7 @@ def main():
         on_file_received_event='ftp'
     )
 
-    FTPListener(ftp_consumer)
+    listener = FTPListener(ftp_consumer)
 
     ftp_consumer.consume()
 

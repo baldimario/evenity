@@ -1,20 +1,21 @@
 """Ovservable class"""
+import weakref
 
 class Observable:
     """Observable class"""
 
     def __init__(self):
-        self._observers = []
+        self._observers = weakref.WeakValueDictionary()
 
     def register_observer(self, observer):
         """Register an observer"""
-        self._observers.append(observer)
-
-    def unregister_observer(self, observer):
-        """Unregister an observer"""
-        self._observers.remove(observer)
+        self._observers[id(observer)] = observer
 
     def notify_observers(self, listener, event):
         """Notify all observers"""
-        for obs in self._observers:
-            obs.notify(listener, event)
+        for oid in self._observers:
+            self._observers[oid].notify(listener, event)
+
+    def deregister_observer(self, observer):
+        """Deregister an observer"""
+        self._observers.remove(id(observer))

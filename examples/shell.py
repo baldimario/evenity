@@ -17,7 +17,7 @@ class ShellListener(Observer):
 def main():
     """Main function"""
     observable = ShellObservableConsumer('monitor-sensor --accel')
-    ShellListener(observable)
+    listener = ShellListener(observable)
     observable.consume()
 
 if __name__ == '__main__':

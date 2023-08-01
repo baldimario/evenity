@@ -12,13 +12,10 @@ class EventDispatcher(Observable):
         """Consume the observable"""
         self.notify_observers(topic, event)
 
-class TestSimple(unittest.TestCase):
+class TestMemoryLeak(unittest.TestCase):
 
-    def test_simple(self):
-        expected_events = [
-            "1 Hello World!",
-            "2 Foo Bar!",
-        ]
+    def test_memory_leak(self):
+        expected_events = []
         received_events = []
 
         dispatcher = EventDispatcher()
@@ -31,6 +28,9 @@ class TestSimple(unittest.TestCase):
             ["test", "Hello World!"],
             ["foo", "Foo Bar!"],
         ]
+
+        # observer weakref is not collected
+        observer = None
 
         for event in events:
             dispatcher.dispatch(event[0], event[1])
